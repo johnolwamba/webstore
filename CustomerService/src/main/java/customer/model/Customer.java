@@ -13,6 +13,9 @@ public class Customer {
     private Contact contact;
     private Address address;
 
+    public Customer() {
+    }
+
     public Customer(Long customerId, String firstName, String lastName, Contact contact, Address address) {
         this.customerId = customerId;
         this.firstName = firstName;
@@ -59,6 +62,14 @@ public class Customer {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public Customer update(Customer customer) {
+        this.setFirstName(customer.getFirstName());
+        this.setLastName(customer.getLastName());
+        this.setAddress(customer.getAddress());
+        this.setContact(customer.getContact());
+        return this;
     }
 
     @Override

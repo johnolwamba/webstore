@@ -11,6 +11,9 @@ public class CustomerDTO {
     private Contact contact;
     private Address address;
 
+    public CustomerDTO() {
+    }
+
     public CustomerDTO(Long customerId, String firstName, String lastName, Contact contact, Address address) {
         this.customerId = customerId;
         this.firstName = firstName;
