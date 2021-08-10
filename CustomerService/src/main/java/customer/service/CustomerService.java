@@ -32,8 +32,9 @@ public class CustomerService {
         if (result.isPresent()) {
             Customer savedCustomer = result.get();
             Customer updatedCustomer = CustomerAdapter.getCustomerFromCustomerDTO(customerDTO);
-            savedCustomer.update(updatedCustomer);
-            return customerDTO;
+            Customer customer = savedCustomer.update(updatedCustomer);
+            customerRepository.save(customer);
+            return CustomerAdapter.getCustomerDTOFromCustomer(customer);
         } else {
             return null;
         }
