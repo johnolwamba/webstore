@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: customerService
+          uri: http://localhost:8090/
+          predicates:
+            - Path=/customer/**
+        - id: productService
+          uri: http://localhost:8902/
+          #          - http://localhost:8902/
+          #          - http://localhost:8903/
+          #          - http://localhost:8904/
+          predicates:
+            - Path=/product/**
+
+server:
+  port: 8081
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/, http://localhost:8762/eureka/
+
+sleuth:
+  sampler:
+    probability: 1 #100% (default = 10%)
+
