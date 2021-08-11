@@ -1,17 +1,12 @@
-package shoppingservice.domain;
+package order.domain;
 
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
-public class CartLine {
+public class OrderLineItem {
     int quantity;
     Product product;
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
+    public OrderLineItem(int quantity, Product product) {
+        this.quantity = quantity;
         this.product = product;
     }
 
@@ -23,9 +18,17 @@ public class CartLine {
         this.quantity = quantity;
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     @Override
     public String toString() {
-        return "CartLine{" +
+        return "OrderLineItem{" +
                 "quantity=" + quantity +
                 ", product=" + product +
                 '}';

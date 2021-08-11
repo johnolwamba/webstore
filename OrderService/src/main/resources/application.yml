@@ -5,7 +5,7 @@ logging:
       springframework: ERROR
 
 server:
-  port: 8501
+  port: 8502
 
 eureka:
   client:
@@ -14,12 +14,12 @@ eureka:
 
 spring:
   application:
-    name: ShoppingCartService
+    name: OrderService
   data:
     mongodb:
       host: localhost
       port: 27017
-      database: shopping-cart
+      database: orders
   zipkin:
     base-url: http://localhost:9411/
     enabled: true

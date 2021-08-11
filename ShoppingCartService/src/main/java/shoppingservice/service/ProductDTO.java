@@ -1,11 +1,6 @@
-package shoppingservice.domain;
+package shoppingservice.service;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document
-public class Product {
-    @Id
+public class ProductDTO {
     private String productNumber;
 
     private String name;
@@ -13,11 +8,10 @@ public class Product {
     private String description;
     private Integer numInStock;
 
-    public Product() {
+    public ProductDTO() {
     }
 
-    public Product(String productNumber, String name, Double price,
-                   String description, Integer numInStock) {
+    public ProductDTO(String productNumber, String name, Double price, String description, Integer numInStock) {
         this.productNumber = productNumber;
         this.name = name;
         this.price = price;
@@ -67,7 +61,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
+        return "ProductDTO{" +
                 "productNumber='" + productNumber + '\'' +
                 ", name='" + name + '\'' +
                 ", price=" + price +
