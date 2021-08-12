@@ -5,17 +5,21 @@ spring:
     gateway:
       routes:
         - id: customerService
-          uri: http://localhost:8090/
+          uri: lb://CustomerService
           predicates:
             - Path=/customer/**
         - id: productService
-          uri: http://localhost:8902/
-          #          - http://localhost:8902/
-          #          - http://localhost:8903/
-          #          - http://localhost:8904/
+          uri: lb://ProductService
           predicates:
             - Path=/product/**
-
+        - id: shoppingCartService
+          uri: lb://ShoppingCartService
+          predicates:
+            - Path=/cart/**
+        - id: orderService
+          uri: lb://OrderService
+          predicates:
+            - Path=/order/**
 server:
   port: 8081
 

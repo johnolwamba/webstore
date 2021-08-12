@@ -1,6 +1,8 @@
 package product.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import product.service.ProductDTO;
 import product.service.ProductService;
@@ -11,23 +13,38 @@ public class ProductController {
     ProductService productService;
 
     @PostMapping("/product")
-    public ProductDTO addCustomer(@RequestBody ProductDTO productDTO) {
-        return productService.createProduct(productDTO);
+    public ResponseEntity<?> createProduct(@RequestBody ProductDTO productDTO) {
+        ProductDTO createdProductDTO = productService.createProduct(productDTO);
+        return new ResponseEntity<>(createdProductDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/product/{productId}/{quantity}")
+    public ResponseEntity<?> isEnoughInStock(@PathVariable("productId") String productId,
+                                             @PathVariable("quantity") Integer quantity) {
+        Boolean isEnough = productService.isEnoughInStock(productId, quantity);
+        if (isEnough == null || Boolean.FALSE.equals(isEnough)) {
+            return new ResponseEntity<>("Not Enough In Stock", HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
     }
 
     @GetMapping("/product/{productId}")
-    public ProductDTO getCustomer(@PathVariable("productId") String productId) {
-        return productService.getProduct(productId);
+    public ResponseEntity<?> getProduct(@PathVariable("productId") String productId) {
+        ProductDTO createdProductDTO = productService.getProduct(productId);
+        return new ResponseEntity<>(createdProductDTO, HttpStatus.OK);
     }
 
     @PutMapping("/product/{productId}")
-    public ProductDTO updateProduct(@PathVariable("productId") String productId,
-                                    @RequestBody ProductDTO productDTO) {
-        return productService.updateProduct(productDTO, productId);
+    public ResponseEntity<?> updateProduct(@PathVariable("productId") String productId,
+                                           @RequestBody ProductDTO productDTO) {
+        ProductDTO updatedProductDTO = productService.updateProduct(productDTO, productId);
+        return new ResponseEntity<>(updatedProductDTO, HttpStatus.OK);
     }
 
     @DeleteMapping("/product/{productId}")
-    public void deleteProduct(@PathVariable("productId") String productId) {
+    public ResponseEntity<?> deleteProduct(@PathVariable("productId") String productId) {
         productService.deleteProduct(productId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -4,6 +4,14 @@ public class CartLineDTO {
     int quantity;
     ProductDTO product;
 
+    public CartLineDTO() {
+    }
+
+    public CartLineDTO(int quantity, ProductDTO product) {
+        this.quantity = quantity;
+        this.product = product;
+    }
+
     public ProductDTO getProduct() {
         return product;
     }
@@ -22,7 +30,7 @@ public class CartLineDTO {
 
     @Override
     public String toString() {
-        return "CartLineDTO{" +
+        return "CartLineRecord{" +
                 "quantity=" + quantity +
                 ", product=" + product +
                 '}';

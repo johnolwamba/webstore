@@ -82,4 +82,16 @@ public class Product {
         this.setNumInStock(updatedProduct.getNumInStock());
         return this;
     }
+
+    public Boolean isEnoughInStock(int quantity) {
+        return this.getNumInStock() >= quantity;
+    }
+
+    public void decrementStock(int quantity) {
+        if (quantity > this.numInStock) {
+            return;
+        } else {
+            this.setNumInStock(this.getNumInStock() - quantity);
+        }
+    }
 }

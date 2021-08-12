@@ -1,5 +1,7 @@
 package shoppingservice.domain;
 
+import kafka.CustomerAdapter;
+import kafka.ShoppingCartRecord;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,14 +12,15 @@ import java.util.Iterator;
 public class ShoppingCart {
     @Id
     private Long id;
-
+    private Customer customer;
     ArrayList<CartLine> cartlineList = new ArrayList<CartLine>();
 
     public ShoppingCart() {
     }
 
-    public ShoppingCart(Long id, ArrayList<CartLine> cartlineList) {
+    public ShoppingCart(Long id, Customer customer, ArrayList<CartLine> cartlineList) {
         this.id = id;
+        this.customer = customer;
         this.cartlineList = cartlineList;
     }
 
@@ -35,6 +38,14 @@ public class ShoppingCart {
 
     public void setCartlineList(ArrayList<CartLine> cartlineList) {
         this.cartlineList = cartlineList;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public void addToCart(Product product, int quantity) {
@@ -70,5 +81,14 @@ public class ShoppingCart {
                 }
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return "ShoppingCartRecord{" +
+                "id=" + id +
+                ", customer=" + customer +
+                ", cartlineList=" + cartlineList +
+                '}';
     }
 }

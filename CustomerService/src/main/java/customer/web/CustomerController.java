@@ -3,6 +3,8 @@ package customer.web;
 import customer.service.CustomerDTO;
 import customer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -11,23 +13,27 @@ public class CustomerController {
     CustomerService customerService;
 
     @PostMapping("/customer")
-    public CustomerDTO addCustomer(@RequestBody CustomerDTO customerDTO) {
-        return customerService.createCustomer(customerDTO);
+    public ResponseEntity<?> addCustomer(@RequestBody CustomerDTO customerDTO) {
+        CustomerDTO responseDTO = customerService.createCustomer(customerDTO);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
     @GetMapping("/customer/{customerId}")
-    public CustomerDTO getCustomer(@PathVariable("customerId") Long customerId) {
-        return customerService.getCustomer(customerId);
+    public ResponseEntity<?> getCustomer(@PathVariable("customerId") Long customerId) {
+        CustomerDTO responseDTO = customerService.getCustomer(customerId);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
     @PutMapping("/customer/{customerId}")
-    public CustomerDTO updateCustomer(@PathVariable("customerId") Long customerId,
+    public ResponseEntity<?> updateCustomer(@PathVariable("customerId") Long customerId,
                                       @RequestBody CustomerDTO customerDTO) {
-        return customerService.updateCustomer(customerDTO, customerId);
+        CustomerDTO responseDTO = customerService.updateCustomer(customerDTO, customerId);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
     @DeleteMapping("/customer/{customerId}")
-    public void deleteCustomer(@PathVariable("customerId") Long customerId) {
+    public ResponseEntity<?> deleteCustomer(@PathVariable("customerId") Long customerId) {
         customerService.deleteCustomer(customerId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -1,7 +1,5 @@
 package order.domain;
 
-import org.springframework.data.annotation.Id;
-
 public class Customer {
     private Long customerId;
 

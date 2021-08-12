@@ -4,14 +4,15 @@ import java.util.ArrayList;
 
 public class ShoppingCartDTO {
     private Long id;
-
+    private CustomerDTO customer;
     ArrayList<CartLineDTO> cartlineList = new ArrayList<CartLineDTO>();
 
     public ShoppingCartDTO() {
     }
 
-    public ShoppingCartDTO(Long id, ArrayList<CartLineDTO> cartlineList) {
+    public ShoppingCartDTO(Long id, CustomerDTO customer, ArrayList<CartLineDTO> cartlineList) {
         this.id = id;
+        this.customer = customer;
         this.cartlineList = cartlineList;
     }
 
@@ -31,7 +32,24 @@ public class ShoppingCartDTO {
         this.cartlineList = cartlineList;
     }
 
+    public CustomerDTO getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(CustomerDTO customer) {
+        this.customer = customer;
+    }
+
     public void addCartLine(CartLineDTO cartLine) {
         cartlineList.add(cartLine);
+    }
+
+    @Override
+    public String toString() {
+        return "ShoppingCartDTO{" +
+                "id=" + id +
+                ", customer=" + customer +
+                ", cartlineList=" + cartlineList +
+                '}';
     }
 }
